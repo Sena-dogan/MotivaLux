@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
@@ -14,6 +15,7 @@ import 'constants/strings.dart';
 import 'data/hive/hive.dart';
 import 'data/hive/hive_helper.dart';
 import 'di/components/service_locator.dart';
+import 'firebase_options.dart';
 import 'my_app.dart';
 
 /// Try using const constructors as much as possible!
@@ -21,6 +23,9 @@ import 'my_app.dart';
 void main() async {
   /// Initialize packages
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await EasyLocalization.ensureInitialized();
   await GetStorage.init();
   await initHive();
@@ -47,6 +52,7 @@ void main() async {
       ),
     ),
   );
+
   /// Add this line to get the error stack trace in release mode
   FlutterError.demangleStackTrace = (StackTrace stack) {
     if (stack is stack_trace.Trace) return stack.vmTrace;

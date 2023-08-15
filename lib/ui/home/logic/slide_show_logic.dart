@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:motivation/ui/home/models/slide_show_ui_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../models/slide_show_ui_model.dart';
 
 part 'slide_show_logic.g.dart';
 
@@ -10,8 +10,6 @@ class SlideShowLogic extends _$SlideShowLogic {
   SlideShowUIModel build() {
     return const SlideShowUIModel(
       isLoading: true,
-      slides: [],
-      error: null,
     );
   }
 
@@ -35,9 +33,13 @@ class SlideShowLogic extends _$SlideShowLogic {
 
   dynamic getSlides({Function()? onSuccess}) async {
     state = state.copyWith(isLoading: true, slides: [
-      const Slide(isVideo: false, mediaUrl: '', text: 'Başarısızlık yoktur. Deneyim vardır.'),
+      const Slide(
+          isVideo: false,
+          mediaUrl: '',
+          text: 'Başarısızlık yoktur. Deneyim vardır.'),
       const Slide(isVideo: false, mediaUrl: '', text: 'Bumblebee is a Camaro.'),
-      const Slide(isVideo: false, mediaUrl: '', text: 'I will buy a Challenger.'),
+      const Slide(
+          isVideo: false, mediaUrl: '', text: 'I will buy a Challenger.'),
     ]);
   }
 }

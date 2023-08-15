@@ -1,17 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
-import 'package:ionicons/ionicons.dart';
 
 import '../../../utils/context_extensions.dart';
 
 import '../widgets/app_bar_gone.dart';
 import '../widgets/bottom_nav_bar.dart';
-import 'widgets/header.dart';
 import 'widgets/slide_show_widget.dart';
-import 'widgets/social_tile_widget.dart';
-import 'widgets/theme_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -20,9 +15,19 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: const EmptyAppBar(),
-      bottomNavigationBar: const BottomNavBar(),
+      //bottomNavigationBar: const BottomNavBar(),
       backgroundColor: context.colorScheme.background,
-      body: const PageviewSlide()
+      body: const Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Image(
+              image: AssetImage('assets/img/wallpaper2.jpeg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          PageviewSlide(),
+        ],
+      )
     );
   }
 }
