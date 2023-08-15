@@ -1,4 +1,4 @@
-package boilerplate.template.riverpod
+package com.digitexa.motivation
 
 import io.flutter.embedding.android.FlutterActivity
 

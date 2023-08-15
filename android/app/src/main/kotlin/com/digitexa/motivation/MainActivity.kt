@@ -1,4 +1,4 @@
-package boilerplate.template.motivation_app
+package com.digitexa.motivation
 
 import io.flutter.embedding.android.FlutterActivity
 

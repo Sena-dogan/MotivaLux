@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "409228703352",
+    "project_id": "motivation-29e5b",
+    "storage_bucket": "motivation-29e5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409228703352:android:c7692ccd2f65960cb21f8d",
+        "android_client_info": {
+          "package_name": "com.digitexa.motivation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409228703352-sg742ovhh8l9ruu94bfglfts8gsv17qf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT7AEaJNWcis1RVGNZRSHw8qyfCNJTunw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409228703352-sg742ovhh8l9ruu94bfglfts8gsv17qf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "409228703352-f8ci3ivr435pbmcshd4djqrpqlstlipo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.digitexa.motivation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
