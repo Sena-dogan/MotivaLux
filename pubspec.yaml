@@ -1,4 +1,4 @@
-name: flutter_riverpod_template
+name: motivation
 description: A flutter boilerplate project with riverpod 2.0 containing riverpod annotations, freezed, lints, hive, easy_translations and more
 
 # The following line prevents the package from being accidentally published to
@@ -69,6 +69,10 @@ dependencies:
   stack_trace: ^1.11.0
   animated_notch_bottom_bar: ^1.0.0
   water_drop_nav_bar: ^2.2.0+5
+  dartz: ^0.10.1
+  video_player: ^2.7.0
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
 
 
 dev_dependencies:

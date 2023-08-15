@@ -9,6 +9,7 @@ import '../../../utils/context_extensions.dart';
 import '../widgets/app_bar_gone.dart';
 import '../widgets/bottom_nav_bar.dart';
 import 'widgets/header.dart';
+import 'widgets/slide_show_widget.dart';
 import 'widgets/social_tile_widget.dart';
 import 'widgets/theme_widget.dart';
 
@@ -21,59 +22,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: const EmptyAppBar(),
       bottomNavigationBar: const BottomNavBar(),
       backgroundColor: context.colorScheme.background,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          const Header(text: 'intro'),
-          const Divider(),
-          const ThemeWidget(),
-          const LanguageTile(),
-          ListView.separated(
-            itemCount: 4,
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
-            separatorBuilder: (BuildContext context, int index) {
-              return const Gap(5); // Change the height to control the gap size
-            },
-            itemBuilder: (BuildContext context, int index) {
-              // Switch case to return different widgets for each index
-              switch (index) {
-                case 0:
-                  return SocialTile(
-                    leadingIcon: Icon(Ionicons.logo_github,
-                        color: context.colorScheme.primary),
-                    title: 'Github',
-                    url: Uri.parse('https://github.com/erengun'),
-                  );
-                case 1:
-                  return SocialTile(
-                    leadingIcon: Icon(Ionicons.logo_linkedin,
-                        color: context.colorScheme.primary),
-                    title: 'Linkedin',
-                    url: Uri.parse('https://www.linkedin.com/in/erengun'),
-                  );
-                case 2:
-                  return SocialTile(
-                    leadingIcon: Icon(Ionicons.logo_medium,
-                        color: context.colorScheme.primary),
-                    title: 'Medium',
-                    url: Uri.parse('https://erengun.medium.com/'),
-                  );
-                case 3:
-                  return SocialTile(
-                    leadingIcon: Icon(Ionicons.globe_outline,
-                        color: context.colorScheme.primary),
-                    title: 'Website',
-                    url: Uri.parse('https://erengun.dev'),
-                  );
-                default:
-                  return const SizedBox.shrink();
-              }
-            },
-          )
-        ],
-      ),
+      body: const PageviewSlide()
     );
   }
 }
