@@ -1,11 +1,13 @@
+// ignore_for_file: always_specify_types
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:motivation/ui/widgets/bottom_nav_bar.dart';
 
 import '../../../utils/context_extensions.dart';
 
 import '../widgets/app_bar_gone.dart';
-import '../widgets/bottom_nav_bar.dart';
 import 'widgets/slide_show_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -14,21 +16,21 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: const EmptyAppBar(),
-      //bottomNavigationBar: const BottomNavBar(),
-      backgroundColor: context.colorScheme.background,
-      body: const Stack(
-        children: <Widget>[
-          Positioned.fill(
-            child: Image(
-              image: AssetImage('assets/img/wallpaper2.jpeg'),
-              fit: BoxFit.cover,
+        appBar: const EmptyAppBar(),
+        //bottomNavigationBar: const BottomNavBar(),
+        backgroundColor: context.colorScheme.background,
+        body: const Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Image(
+                image: AssetImage('assets/img/wallpaper2.jpeg'),
+                fit: BoxFit.cover,
+                opacity: AlwaysStoppedAnimation(0.5),
+              ),
             ),
-          ),
-          PageviewSlide(),
-        ],
-      )
-    );
+            PageviewSlide(),
+          ],
+        ));
   }
 }
 
