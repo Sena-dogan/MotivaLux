@@ -3,32 +3,51 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:motivation/ui/widgets/bottom_nav_bar.dart';
 
-import '../../../utils/context_extensions.dart';
-
+import '../../utils/context_extensions.dart';
 import '../widgets/app_bar_gone.dart';
+import 'widgets/drawer_menu_widget.dart';
 import 'widgets/slide_show_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+        key: scaffoldKey,
         appBar: const EmptyAppBar(),
         //bottomNavigationBar: const BottomNavBar(),
+        drawer: const DrawerMenuWidget(),
         backgroundColor: context.colorScheme.background,
-        body: const Stack(
+        body: Stack(
           children: <Widget>[
-            Positioned.fill(
+            const Positioned.fill(
               child: Image(
                 image: AssetImage('assets/img/wallpaper2.jpeg'),
                 fit: BoxFit.cover,
                 opacity: AlwaysStoppedAnimation(0.5),
               ),
             ),
-            PageviewSlide(),
+            // menu button
+
+            const PageviewSlide(),
+            Positioned(
+              top: 10,
+              right: 10,
+              child: IconButton(
+                onPressed: () {
+                  debugPrint('Menu button pressed');
+                  scaffoldKey.currentState!.openDrawer();
+                },
+                iconSize: 30,
+                icon: const Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ));
   }

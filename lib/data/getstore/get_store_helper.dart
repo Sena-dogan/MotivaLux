@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:injectable/injectable.dart';
 
@@ -10,6 +11,12 @@ const String password = 'password';
 class GetStoreHelper {
   GetStoreHelper(this.getStorage);
   GetStorage getStorage;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future<void> signInWithCredential(AuthCredential credential) async {
+    await _firebaseAuth.signInWithCredential(credential);
+    // Add any additional logic or error handling here
+  }
 
   // save auth token
   Future<void> saveToken(String token) async {

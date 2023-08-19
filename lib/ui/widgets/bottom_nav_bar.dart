@@ -33,8 +33,8 @@ class BottomNavBar extends ConsumerWidget {
           /// case 1:
           ///   context.go(SGRoute.secondScreen.route);
           context.go(nav.navIndex == 1
-              ? SGRoute.firstScreen.route
-              : SGRoute.secondScreen.route);
+              ? SGRoute.home.route
+              : SGRoute.login.route);
         },
         barItems: <BarItem>[
           BarItem(
@@ -42,8 +42,8 @@ class BottomNavBar extends ConsumerWidget {
             outlinedIcon: Ionicons.home_outline,
           ),
           BarItem(
-            filledIcon: Ionicons.information_circle,
-            outlinedIcon: Ionicons.information_circle_outline,
+            filledIcon: Ionicons.log_in,
+            outlinedIcon: Ionicons.log_in_outline,
           ),
         ],
       ),
