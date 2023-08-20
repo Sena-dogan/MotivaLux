@@ -30,29 +30,81 @@ class _PageviewSlideState extends ConsumerState<PageviewSlide> {
         for (final Slide slide in ref.watch(slideShowLogicProvider).slides)
           SlideWidget(
             size: size,
-            text: slide.text,
+            slide: slide,
           )
       ],
     );
   }
 }
 
-class SlideWidget extends ConsumerWidget {
+class SlideWidget extends ConsumerStatefulWidget {
   const SlideWidget({
     super.key,
+    required this.slide,
     required this.size,
-    required this.text,
-    this.author,
   });
-  final String text;
+
+  final Slide slide;
   final Size size;
-  final String? author;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _SlideWidgetState();
+}
+
+class _SlideWidgetState extends ConsumerState<SlideWidget>
+    with TickerProviderStateMixin {
+  late AnimationController _mainTextController;
+  late AnimationController _authorTextController;
+  late Animation<double> _mainTextAnimation;
+  late Animation<double> _authorTextAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _mainTextController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+
+    _authorTextController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+
+    _mainTextAnimation = CurvedAnimation(
+      parent: _mainTextController,
+      curve: Curves.easeIn,
+    );
+
+    _authorTextAnimation = CurvedAnimation(
+      parent: _authorTextController,
+      curve: Curves.easeIn,
+    );
+
+    _mainTextController.forward();
+
+    Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        _authorTextController.forward();
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _mainTextController.dispose();
+    _authorTextController.dispose();
+    super.dispose();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      width: size.width,
-      height: size.height,
+      width: widget.size.width,
+      height: widget.size.height,
       color: Colors.transparent,
       child: Center(
         child: Column(
@@ -61,60 +113,75 @@ class SlideWidget extends ConsumerWidget {
             const Spacer(
               flex: 2,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 34.0),
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                  height: 2,
-                  letterSpacing: 1,
-                  color: Colors.white,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 3.0,
+            GestureDetector(
+              onDoubleTap: () =>
+                  ref.read(slideShowLogicProvider.notifier).setFavorite(widget.slide),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 34.0),
+                child: FadeTransition(
+                  opacity: _mainTextAnimation,
+                  child: Text(
+                    widget.slide.text,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                      height: 2,
+                      letterSpacing: 1,
+                      color: Colors.white,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(2.0, 2.0),
+                          blurRadius: 3.0,
+                        ),
+                        Shadow(
+                          offset: Offset(2.0, 2.0),
+                          blurRadius: 8.0,
+                          color: Color.fromARGB(125, 0, 0, 255),
+                        ),
+                      ],
                     ),
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 8.0,
-                      color: Color.fromARGB(125, 0, 0, 255),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
             const Gap(11),
-            if (author == null)
+            if (widget.slide.author == null)
               Container()
             else
-              Text('— $author',
-                  style: GoogleFonts.dancingScript(
-                    color: Colors.grey[200],
-                    fontSize: 25,
-                    shadows: <Shadow>[
-                      const Shadow(
-                        offset: Offset(2.0, 2.0),
-                        blurRadius: 3.0,
-                      ),
-                      const Shadow(
-                        offset: Offset(2.0, 2.0),
-                        blurRadius: 8.0,
-                        color: Color.fromARGB(125, 0, 0, 255),
-                      ),
-                    ],
-                  )),
+              FadeTransition(
+                opacity: _authorTextAnimation,
+                child: Text('— ${widget.slide.author}',
+                    style: GoogleFonts.dancingScript(
+                      color: Colors.grey[200],
+                      fontSize: 25,
+                      shadows: <Shadow>[
+                        const Shadow(
+                          offset: Offset(2.0, 2.0),
+                          blurRadius: 3.0,
+                        ),
+                        const Shadow(
+                          offset: Offset(2.0, 2.0),
+                          blurRadius: 8.0,
+                          color: Color.fromARGB(125, 0, 0, 255),
+                        ),
+                      ],
+                    )),
+              ),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                   iconSize: 35,
-                  icon: const Icon(Icons.favorite_outline_sharp),
+                  icon: widget.slide.isFavorite
+                      ? const Icon(Icons.favorite)
+                      : const Icon(Icons.favorite_border),
                   color: Colors.white,
                   onPressed: () {
+                    ref
+                        .read(slideShowLogicProvider.notifier)
+                        .setFavorite(widget.slide);
                     // Handle like action here
                   },
                 ),

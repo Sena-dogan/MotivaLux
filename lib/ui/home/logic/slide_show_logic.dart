@@ -1,4 +1,3 @@
-import 'package:riverpod/src/framework.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/models/slide.dart';
@@ -9,6 +8,36 @@ part 'slide_show_logic.g.dart';
 @riverpod
 Future<List<Slide>> fetchSlides(FetchSlidesRef ref) async {
   final List<Slide> slides = [
+    const Slide(
+      isVideo: true,
+      mediaUrl: '',
+      text:
+          'You’ve gotta dance like there’s nobody watching, love like you’ll never be hurt, sing like there’s nobody listening, and live like it’s heaven on earth.',
+      isFavorite: false,
+      author: 'William W. Purkey',
+    ),
+    const Slide(
+      isVideo: true,
+      mediaUrl: '',
+      text:
+          'Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.',
+      isFavorite: false,
+      author: 'Neil Gaiman',
+    ),
+    const Slide(
+      isVideo: true,
+      mediaUrl: '',
+      text:
+          'Magic is believing in yourself. If you can make that happen, you can make anything happen.',
+      isFavorite: false,
+    ),
+    const Slide(
+      isVideo: true,
+      mediaUrl: '',
+      text: 'Everything you can imagine is real.',
+      isFavorite: false,
+      author: 'Pablo Picasso',
+    ),
     const Slide(
       isVideo: true,
       mediaUrl: '',
@@ -30,7 +59,6 @@ Future<List<Slide>> fetchSlides(FetchSlidesRef ref) async {
       author: 'Sena',
     ),
   ];
-  await Future<void>.delayed(const Duration(seconds: 2));
   return slides;
 }
 
