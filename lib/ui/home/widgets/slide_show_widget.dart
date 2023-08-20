@@ -99,7 +99,6 @@ class _SlideWidgetState extends ConsumerState<SlideWidget>
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -113,92 +112,143 @@ class _SlideWidgetState extends ConsumerState<SlideWidget>
             const Spacer(
               flex: 2,
             ),
-            GestureDetector(
-              onDoubleTap: () =>
-                  ref.read(slideShowLogicProvider.notifier).setFavorite(widget.slide),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 34.0),
-                child: FadeTransition(
-                  opacity: _mainTextAnimation,
-                  child: Text(
-                    widget.slide.text,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                      height: 2,
-                      letterSpacing: 1,
-                      color: Colors.white,
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(2.0, 2.0),
-                          blurRadius: 3.0,
-                        ),
-                        Shadow(
-                          offset: Offset(2.0, 2.0),
-                          blurRadius: 8.0,
-                          color: Color.fromARGB(125, 0, 0, 255),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+            MainText(
+              ref: ref,
+              widget: widget,
+              mainTextAnimation: _mainTextAnimation,
             ),
             const Gap(11),
             if (widget.slide.author == null)
               Container()
             else
-              FadeTransition(
-                opacity: _authorTextAnimation,
-                child: Text('— ${widget.slide.author}',
-                    style: GoogleFonts.dancingScript(
-                      color: Colors.grey[200],
-                      fontSize: 25,
-                      shadows: <Shadow>[
-                        const Shadow(
-                          offset: Offset(2.0, 2.0),
-                          blurRadius: 3.0,
-                        ),
-                        const Shadow(
-                          offset: Offset(2.0, 2.0),
-                          blurRadius: 8.0,
-                          color: Color.fromARGB(125, 0, 0, 255),
-                        ),
-                      ],
-                    )),
-              ),
+              AuthorText(
+                  authorTextAnimation: _authorTextAnimation, widget: widget),
             const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                  iconSize: 35,
-                  icon: widget.slide.isFavorite
-                      ? const Icon(Icons.favorite)
-                      : const Icon(Icons.favorite_border),
-                  color: Colors.white,
-                  onPressed: () {
-                    ref
-                        .read(slideShowLogicProvider.notifier)
-                        .setFavorite(widget.slide);
-                    // Handle like action here
-                  },
-                ),
-                IconButton(
-                  iconSize: 35,
-                  icon: const Icon(Icons.ios_share_outlined),
-                  color: Colors.white,
-                  onPressed: () {
-                    // Handle share action here
-                  },
-                ),
-              ],
-            ),
+            ActionsWidget(widget: widget),
             const Spacer(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class MainText extends ConsumerWidget {
+  const MainText({
+    super.key,
+    required this.ref,
+    required this.widget,
+    required this.mainTextAnimation,
+  });
+
+  final WidgetRef ref;
+  final SlideWidget widget;
+  final Animation<double> mainTextAnimation;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onDoubleTap: () =>
+          ref.read(slideShowLogicProvider.notifier).setFavorite(widget.slide),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 34.0),
+        child: FadeTransition(
+          opacity: mainTextAnimation,
+          child: Text(
+            widget.slide.text,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+              height: 2,
+              letterSpacing: 1,
+              color: Colors.white,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(2.0, 2.0),
+                  blurRadius: 3.0,
+                ),
+                Shadow(
+                  offset: Offset(2.0, 2.0),
+                  blurRadius: 8.0,
+                  color: Color.fromARGB(125, 0, 0, 255),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AuthorText extends StatelessWidget {
+  const AuthorText({
+    super.key,
+    required Animation<double> authorTextAnimation,
+    required this.widget,
+  }) : _authorTextAnimation = authorTextAnimation;
+
+  final Animation<double> _authorTextAnimation;
+  final SlideWidget widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: _authorTextAnimation,
+      child: Text('— ${widget.slide.author}',
+          style: GoogleFonts.dancingScript(
+            color: Colors.grey[200],
+            fontSize: 25,
+            shadows: <Shadow>[
+              const Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 3.0,
+              ),
+              const Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 8.0,
+                color: Color.fromARGB(125, 0, 0, 255),
+              ),
+            ],
+          )),
+    );
+  }
+}
+
+class ActionsWidget extends ConsumerWidget {
+  const ActionsWidget({
+    super.key,
+    required this.widget,
+  });
+
+  final SlideWidget widget;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        IconButton(
+          iconSize: 35,
+          icon: widget.slide.isFavorite
+              ? const Icon(Icons.favorite)
+              : const Icon(Icons.favorite_border),
+          color: Colors.white,
+          onPressed: () {
+            ref.read(slideShowLogicProvider.notifier).setFavorite(widget.slide);
+            // Handle like action here
+          },
+        ),
+        IconButton(
+          iconSize: 35,
+          icon: const Icon(Icons.ios_share_outlined),
+          color: Colors.white,
+          onPressed: () {
+            // Handle share action here
+          },
+        ),
+      ],
     );
   }
 }
