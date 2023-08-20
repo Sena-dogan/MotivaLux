@@ -3,41 +3,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PageviewSlide extends ConsumerWidget {
+import '../../../data/models/slide.dart';
+import '../logic/slide_show_logic.dart';
+
+class PageviewSlide extends ConsumerStatefulWidget {
   const PageviewSlide({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _PageviewSlideState();
+}
+
+class _PageviewSlideState extends ConsumerState<PageviewSlide> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(fetchSlidesProvider.future).then((List<Slide> slides) =>
+        ref.read(slideShowLogicProvider.notifier).setSlides(slides));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return PageView(
       scrollDirection: Axis.vertical,
       children: <Widget>[
-        SlideWidget(
-          size: size,
-          text:
-              'LIFE IS TOO SHORT TO WAKE UP IN THE MORNING WITH REGRETS. SO LOVE THE PEOPLE WHO TREAT YOU RIGHT AND FORGET ABOUT THE ONES WHO DONT.',
-        ),
-        SlideWidget(
-          size: size,
-          text:
-              'THE TRUTH IS EVERYONE IS GOING TO HURT YOU. YOU JUST GOT TO FIND THE ONES WORTH SUFFERING FOR.',
-          author: 'Bob Marley',
-        ),
-        SlideWidget(
-          size: size,
-          text:
-              'THE BEST LOVE IS THE KIND THAT AWAKENS THE SOUL; THAT MAKES US REACH FOR MORE, THAT PLANTS THE FIRE IN OUR HEARTS AND BRINGS PEACE TO OUR MINDS. THATS WHAT I HOPE TO GIVE YOU FOREVER.',
-        ),
-        SlideWidget(
-          size: size,
-          text:
-              'LOVE IS LIKE A FRIENDSHIP CAUGHT ON FIRE. IN THE BEGINNING A FLAME, VERY PRETTY, OFTEN HOT AND FIERCE, BUT STILL ONLY LIGHT AND FLICKERING. AS LOVE GROWS OLDER, OUR HEARTS MATURE AND OUR LOVE BECOMES AS COALS, DEEP-BURNING AND UNQUENCHABLE.',
-        ),
-        SlideWidget(
-          size: size,
-          text:
-              'LOVE IS A PROMISE; LOVE IS A SOUVENIR, ONCE GIVEN NEVER FORGOTTEN, NEVER LET IT DISAPPEAR.',
-        ),
+        for (final Slide slide in ref.watch(slideShowLogicProvider).slides)
+          SlideWidget(
+            size: size,
+            text: slide.text,
+          )
       ],
     );
   }

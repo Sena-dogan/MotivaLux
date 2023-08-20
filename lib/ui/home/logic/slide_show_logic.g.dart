@@ -6,7 +6,21 @@ part of 'slide_show_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$slideShowLogicHash() => r'ddf745de02aaa3ad343caa100c815a5a66b8631d';
+String _$fetchSlidesHash() => r'4abe9d932373b75d3d80e9a7d4653446fcc7e9b4';
+
+/// See also [fetchSlides].
+@ProviderFor(fetchSlides)
+final fetchSlidesProvider = AutoDisposeFutureProvider<List<Slide>>.internal(
+  fetchSlides,
+  name: r'fetchSlidesProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchSlidesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef FetchSlidesRef = AutoDisposeFutureProviderRef<List<Slide>>;
+String _$slideShowLogicHash() => r'7eecbd8088599eab7a80b2be2210ad65455f21b0';
 
 /// See also [SlideShowLogic].
 @ProviderFor(SlideShowLogic)

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../auth/login_page.dart';
 import '../../data/getstore/get_store_helper.dart';
 import '../../di/components/service_locator.dart';
-import '../../ui/auth/login_page.dart';
 import '../../ui/error/not_found_page.dart';
 import '../../ui/home/home.dart';
 import 'fade_extension.dart';

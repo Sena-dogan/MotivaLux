@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../home/widgets/drawer_menu_widget.dart';
-import '../widgets/auth_widget.dart';
+import '../ui/home/widgets/drawer_menu_widget.dart';
+import '../ui/widgets/auth_widget.dart';
 
 class LoginPage extends ConsumerWidget {
   LoginPage({super.key});
