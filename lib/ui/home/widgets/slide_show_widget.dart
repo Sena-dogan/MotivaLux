@@ -185,17 +185,17 @@ class MainText extends ConsumerWidget {
 class AuthorText extends StatelessWidget {
   const AuthorText({
     super.key,
-    required Animation<double> authorTextAnimation,
+    required this.authorTextAnimation,
     required this.widget,
-  }) : _authorTextAnimation = authorTextAnimation;
+  });
 
-  final Animation<double> _authorTextAnimation;
+  final Animation<double> authorTextAnimation;
   final SlideWidget widget;
 
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: _authorTextAnimation,
+      opacity: authorTextAnimation,
       child: Text('— ${widget.slide.author}',
           style: GoogleFonts.dancingScript(
             color: Colors.grey[200],
