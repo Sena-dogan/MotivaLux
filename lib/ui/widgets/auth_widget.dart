@@ -32,7 +32,7 @@ class SignInWithApple extends ConsumerWidget {
     return SocialLoginButton(
         buttonType: SocialLoginButtonType.appleBlack,
         backgroundColor: Colors.black,
-        borderRadius: 18,
+        borderRadius: 50,
         onPressed: () {
           ref.read(loginLogicProvider.notifier).signInWithApple();
         });
@@ -47,7 +47,7 @@ class SignInWithGoogle extends ConsumerWidget {
     return SocialLoginButton(
         buttonType: SocialLoginButtonType.google,
         backgroundColor: Colors.white,
-        borderRadius: 18,
+        borderRadius: 50,
         onPressed: () {
           ref.read(loginLogicProvider.notifier).signInWithGoogle();
         });

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../utils/context_extensions.dart';
-import '../widgets/app_bar_gone.dart';
 import 'widgets/drawer_menu_widget.dart';
 import 'widgets/slide_show_widget.dart';
 
@@ -17,7 +16,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         key: scaffoldKey,
-        appBar: const EmptyAppBar(),
+        //appBar: const EmptyAppBar(),
         //bottomNavigationBar: const BottomNavBar(),
         drawer: const DrawerMenuWidget(),
         backgroundColor: context.colorScheme.background,
@@ -25,7 +24,7 @@ class HomeScreen extends ConsumerWidget {
           children: <Widget>[
             const Positioned.fill(
               child: Image(
-                image: AssetImage('assets/img/wallpaper2.jpeg'),
+                image: AssetImage('assets/img/walpaper3.png'),
                 fit: BoxFit.cover,
                 opacity: AlwaysStoppedAnimation(0.5),
               ),
@@ -34,8 +33,8 @@ class HomeScreen extends ConsumerWidget {
 
             const PageviewSlide(),
             Positioned(
-              top: 10,
-              right: 10,
+              top: 40,
+              left: 20,
               child: IconButton(
                 onPressed: () {
                   debugPrint('Menu button pressed');

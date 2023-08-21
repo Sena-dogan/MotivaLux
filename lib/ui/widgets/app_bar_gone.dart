@@ -13,7 +13,7 @@ class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarBrightness: brightness,
         systemStatusBarContrastEnforced: false,
-        statusBarColor: Theme.of(context).colorScheme.background,
+        statusBarColor: Colors.transparent,
         statusBarIconBrightness:
             brightness == Brightness.dark ? Brightness.light : Brightness.dark,
       ),

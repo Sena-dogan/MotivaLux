@@ -87,13 +87,17 @@ class _SlideWidgetState extends ConsumerState<SlideWidget>
     Future.delayed(
       const Duration(seconds: 1),
       () {
-        _authorTextController.forward();
+        if (mounted) 
+        {
+          _authorTextController.forward();
+        }
       },
     );
   }
 
   @override
   void dispose() {
+    //debugPrint('SlideWidget disposed');
     _mainTextController.dispose();
     _authorTextController.dispose();
     super.dispose();
