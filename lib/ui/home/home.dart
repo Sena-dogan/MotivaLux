@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../utils/context_extensions.dart';
 import 'widgets/drawer_menu_widget.dart';
 import 'widgets/slide_show_widget.dart';
 
@@ -19,14 +18,14 @@ class HomeScreen extends ConsumerWidget {
         //appBar: const EmptyAppBar(),
         //bottomNavigationBar: const BottomNavBar(),
         drawer: const DrawerMenuWidget(),
-        backgroundColor: context.colorScheme.background,
+        backgroundColor: Colors.transparent,
         body: Stack(
           children: <Widget>[
             const Positioned.fill(
               child: Image(
                 image: AssetImage('assets/img/walpaper3.png'),
                 fit: BoxFit.cover,
-                opacity: AlwaysStoppedAnimation(0.5),
+                opacity: AlwaysStoppedAnimation(0.7),
               ),
             ),
             // menu button
