@@ -48,7 +48,7 @@ class LoginLogic extends _$LoginLogic {
       setLogin(isLoading: true);
       final AuthorizationCredentialAppleID appleCredential =
           await SignInWithApple.getAppleIDCredential(
-        scopes: [
+        scopes: <AppleIDAuthorizationScopes>[
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],

@@ -17,7 +17,7 @@ class DrawerMenuWidget extends StatelessWidget {
       width: size.width * 0.5,
       child: ListView(
         padding: EdgeInsets.zero,
-        children: [
+        children: <Widget>[
           Gap(size.height * 0.1),
           MenuItem(
             title: 'Home',

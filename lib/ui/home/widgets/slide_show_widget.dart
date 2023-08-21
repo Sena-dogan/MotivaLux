@@ -108,7 +108,7 @@ class _SlideWidgetState extends ConsumerState<SlideWidget>
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             const Spacer(
               flex: 2,
             ),
