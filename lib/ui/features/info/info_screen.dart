@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../widgets/app_bar_gone.dart';
-import '../../widgets/bottom_nav_bar.dart';
+import '../../home/widgets/app_bar_gone.dart';
+import '../../home/widgets/water_drop_nav_bar.dart';
 import 'grid_item.dart';
 
 class SecondScreen extends ConsumerWidget {

@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
-import '../../config/router/app_router.dart';
-import '../../states/widgets/bottom_nav_bar/nav_bar_logic.dart';
-import '../../utils/context_extensions.dart';
+import '../../../../config/router/app_router.dart';
+import '../../../../utils/context_extensions.dart';
+import '../logic/nav_bar_logic.dart';
 
 class BottomNavBar extends ConsumerWidget {
   const BottomNavBar({super.key});

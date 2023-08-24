@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'widgets/drawer_menu_widget.dart';
+import 'widgets/flutter_nav_bar.dart';
 import 'widgets/slide_show_widget.dart';
+
 
 class HomeScreen extends ConsumerWidget {
   HomeScreen({super.key});
@@ -19,6 +21,7 @@ class HomeScreen extends ConsumerWidget {
         //bottomNavigationBar: const BottomNavBar(),
         drawer: const DrawerMenuWidget(),
         backgroundColor: Colors.transparent,
+        bottomNavigationBar: const NavBar(),
         body: Stack(
           children: <Widget>[
             const Positioned.fill(

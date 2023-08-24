@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../models/user.dart';
 
+
 const String userBox = 'user';
 
 @injectable

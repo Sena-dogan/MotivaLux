@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../data/models/slide.dart';
+import 'slide.dart';
 
 part 'slide_show_ui_model.freezed.dart';
 part 'slide_show_ui_model.g.dart';
@@ -16,4 +15,3 @@ abstract class SlideShowUIModel with _$SlideShowUIModel {
   factory SlideShowUIModel.fromJson(Map<String, dynamic> json) =>
       _$SlideShowUIModelFromJson(json);
 }
-

@@ -5,7 +5,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../data/getstore/get_store_helper.dart';
 import '../../di/components/service_locator.dart';
-import 'login_ui_model.dart';
+import '../../models/auth/login_ui_model.dart';
 
 part 'login_logic.g.dart';
 

@@ -25,7 +25,7 @@ class _NotFoundPageState extends State<NotFoundPage> {
             // back to home button
             ElevatedButton(
               onPressed: () {
-                context.pop();
+                context.go('/home');
               },
               child: const Text('Back to Home'),
             )

@@ -1,7 +1,10 @@
+
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../data/models/slide.dart';
-import '../models/slide_show_ui_model.dart';
+import '../../../models/home/slide.dart';
+import '../../../models/home/slide_show_ui_model.dart';
+
 
 part 'slide_show_logic.g.dart';
 

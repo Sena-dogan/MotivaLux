@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../data/models/slide.dart';
+import '../../../models/home/slide.dart';
 import '../logic/slide_show_logic.dart';
 
 class PageviewSlide extends ConsumerStatefulWidget {
