@@ -3,15 +3,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-import '../../data/getstore/get_store_helper.dart';
-import '../../di/components/service_locator.dart';
 import '../../models/auth/login_ui_model.dart';
 
 part 'login_logic.g.dart';
 
 @riverpod
 class LoginLogic extends _$LoginLogic {
-  final GetStoreHelper _getStoreHelper = getIt<GetStoreHelper>();
   @override
   LoginUiModel build() {
     return const LoginUiModel();
@@ -35,7 +32,7 @@ class LoginLogic extends _$LoginLogic {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await _getStoreHelper.signInWithCredential(credential);
+      await FirebaseAuth.instance.signInWithCredential(credential);
       setLogin();
     } catch (e) {
       setError(e.toString());
@@ -58,7 +55,7 @@ class LoginLogic extends _$LoginLogic {
         idToken: appleCredential.identityToken,
         accessToken: appleCredential.authorizationCode,
       );
-      await _getStoreHelper.signInWithCredential(credential);
+      await FirebaseAuth.instance.signInWithCredential(credential);
       setLogin();
     } catch (e) {
       setError(e.toString());
