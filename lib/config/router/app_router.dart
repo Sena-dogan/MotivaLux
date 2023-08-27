@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
@@ -47,8 +48,9 @@ class SGGoRouter {
 /// Example: Auth guard for Route Protection. GetStoreHelper is used to get token.
 final String? Function(BuildContext context, GoRouterState state) _authGuard =
     (BuildContext context, GoRouterState state) {
-  if (!(getStoreHelper.getToken() != null)) {
-    return SGRoute.login.route;
+  if (FirebaseAuth.instance.currentUser == null) {
+    debugPrint('SGGoRouter: AuthGuard: No user found, redirecting to login');
+    return SGRoute.home.route; //SGRoute.login.route;
   }
-  return null;
+  return SGRoute.home.route;
 };
