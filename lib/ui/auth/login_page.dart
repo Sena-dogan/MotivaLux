@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../home/widgets/drawer_menu_widget.dart';
+import '../home/widgets/flutter_nav_bar.dart';
 import 'auth_widget.dart';
 
 class LoginPage extends ConsumerWidget {
@@ -15,9 +15,7 @@ class LoginPage extends ConsumerWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
         key: scaffoldKey,
-        //appBar: const EmptyAppBar(),
-        drawer: const DrawerMenuWidget(),
-        //bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: const NavBar(),
         body: Stack(
           children: <Widget>[
             const Positioned.fill(
@@ -34,21 +32,6 @@ class LoginPage extends ConsumerWidget {
                 right: size.width * 0.03,
               ),
               child: const AuthSocialWidget(),
-            ),
-            Positioned(
-              top: 40,
-              left: 20,
-              child: IconButton(
-                onPressed: () {
-                  debugPrint('Menu button pressed');
-                  scaffoldKey.currentState!.openDrawer();
-                },
-                iconSize: 30,
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-              ),
             ),
           ],
         ));

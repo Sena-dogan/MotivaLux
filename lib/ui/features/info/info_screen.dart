@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../home/widgets/app_bar_gone.dart';
-import '../../home/widgets/water_drop_nav_bar.dart';
+import '../../home/widgets/flutter_nav_bar.dart';
 import 'grid_item.dart';
 
 class SecondScreen extends ConsumerWidget {
@@ -14,7 +14,7 @@ class SecondScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: const EmptyAppBar(),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: const NavBar(),
         body: ScreenTypeLayout.builder(
           mobile: (BuildContext context) => _buildMobileView(),
           tablet: (BuildContext context) => _buildTabletView(),

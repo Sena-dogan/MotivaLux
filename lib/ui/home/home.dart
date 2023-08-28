@@ -4,10 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'widgets/drawer_menu_widget.dart';
 import 'widgets/flutter_nav_bar.dart';
 import 'widgets/slide_show_widget.dart';
-
 
 class HomeScreen extends ConsumerWidget {
   HomeScreen({super.key});
@@ -17,14 +15,11 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         key: scaffoldKey,
-        //appBar: const EmptyAppBar(),
-        //bottomNavigationBar: const BottomNavBar(),
-        drawer: const DrawerMenuWidget(),
         backgroundColor: Colors.transparent,
         bottomNavigationBar: const NavBar(),
-        body: Stack(
+        body: const Stack(
           children: <Widget>[
-            const Positioned.fill(
+            Positioned.fill(
               child: Image(
                 image: AssetImage('assets/img/walpaper3.png'),
                 fit: BoxFit.cover,
@@ -33,22 +28,7 @@ class HomeScreen extends ConsumerWidget {
             ),
             // menu button
 
-            const PageviewSlide(),
-            Positioned(
-              top: 40,
-              left: 20,
-              child: IconButton(
-                onPressed: () {
-                  debugPrint('Menu button pressed');
-                  scaffoldKey.currentState!.openDrawer();
-                },
-                iconSize: 30,
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            PageviewSlide(),
           ],
         ));
   }

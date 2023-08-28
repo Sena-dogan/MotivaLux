@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -35,13 +36,16 @@ class LoginLogic extends _$LoginLogic {
       await FirebaseAuth.instance.signInWithCredential(credential);
       setLogin();
     } catch (e) {
+      debugPrint(e.toString());
       setError(e.toString());
       setLogin();
     }
   }
 
   Future<void> signInWithApple() async {
+    debugPrint('hello my name is apple. i am 7 years old. i like to eat apples');
     try {
+    debugPrint('AAAAAAAAAA my name is apple. i am 7 years old. i like to eat apples');
       setLogin(isLoading: true);
       final AuthorizationCredentialAppleID appleCredential =
           await SignInWithApple.getAppleIDCredential(
@@ -58,6 +62,7 @@ class LoginLogic extends _$LoginLogic {
       await FirebaseAuth.instance.signInWithCredential(credential);
       setLogin();
     } catch (e) {
+      debugPrint(e.toString());
       setError(e.toString());
       setLogin();
     }

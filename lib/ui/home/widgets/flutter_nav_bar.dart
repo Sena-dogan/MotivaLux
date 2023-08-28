@@ -35,12 +35,12 @@ class NavBar extends ConsumerWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.heart),
-          label: 'Likes',
+          icon: Icon(LineIcons.hippo),
+          label: 'Meditation',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.search),
-          label: 'Search',
+          icon: Icon(Icons.grid_view_outlined),
+          label: 'Walllpapers',
         ),
         BottomNavigationBarItem(
           icon: Icon(LineIcons.user),
