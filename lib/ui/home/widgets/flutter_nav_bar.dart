@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:line_icons/line_icons.dart';
 
 import '../../../../utils/context_extensions.dart';
 import '../../../models/home/nav_bar_ui_model.dart';
 import '../logic/nav_bar_logic.dart';
-
 
 class NavBar extends ConsumerWidget {
   const NavBar({super.key});
@@ -16,26 +14,26 @@ class NavBar extends ConsumerWidget {
     final BottomNavBarUiModel nav = ref.watch(bottomNavBarLogicProvider);
     return BottomNavigationBar(
       currentIndex: nav.navIndex,
-      backgroundColor: Colors.black87,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       selectedItemColor: context.theme.primaryColor,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       type: BottomNavigationBarType.fixed,
-      selectedIconTheme: const IconThemeData(
+      selectedIconTheme: IconThemeData(
         size: 23,
-        color: Colors.white,
+        color: context.theme.iconTheme.color,
       ),
       unselectedIconTheme: IconThemeData(
         size: 23,
-        color: Colors.grey[400],
+        color: context.theme.iconTheme.color?.withOpacity(0.7),
       ),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.home),
+          icon: Icon(Icons.home_outlined),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.hippo),
+          icon: Icon(Icons.favorite_outline_rounded),
           label: 'Meditation',
         ),
         BottomNavigationBarItem(
@@ -43,11 +41,11 @@ class NavBar extends ConsumerWidget {
           label: 'Walllpapers',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.user),
+          icon: Icon(Icons.person_outline_rounded),
           label: 'Profile',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.cog),
+          icon: Icon(Icons.settings_outlined),
           label: 'Settings',
         )
       ],
@@ -61,7 +59,7 @@ class NavBar extends ConsumerWidget {
             context.go('/likes');
             break;
           case 2:
-            context.go('/search');
+            context.go('/wallpaper');
             break;
           case 3:
             context.go('/profile');

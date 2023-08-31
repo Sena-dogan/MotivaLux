@@ -4,35 +4,36 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../home/widgets/flutter_nav_bar.dart';
-import '../home/widgets/theme_widget.dart';
+import '../wallpaper/gradient_bg.dart';
+import 'theme_widget.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
       bottomNavigationBar: const NavBar(),
-      body: Column(
-        children: <Widget>[
-          const Gap(40),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: ThemeWidget(),
-          ),
-          const Gap(30),
-          SettingsCard(
-            title: 'Login',
-            onTap: () => context.go('/login'),
-          ),
-          SettingsCard(
-            title: 'Logout',
-            onTap: () => context.go('/logout'),
-          ),
-        ],
+      body: GradientBackground(
+        child: Column(
+          children: <Widget>[
+            Gap(size.height * 0.1),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: ThemeWidget(),
+            ),
+            const Gap(30),
+            SettingsCard(
+              title: 'Login',
+              onTap: () => context.go('/login'),
+            ),
+            SettingsCard(
+              title: 'Logout',
+              onTap: () => context.go('/logout'),
+            ),
+          ],
+        ),
       ),
     );
   }

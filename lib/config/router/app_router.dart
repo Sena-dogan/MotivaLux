@@ -9,12 +9,14 @@ import '../../ui/auth/login_page.dart';
 import '../../ui/error/not_found_page.dart';
 import '../../ui/home/home.dart';
 import '../../ui/settings/settings_page.dart';
+import '../../ui/wallpaper/wallpaper_page.dart';
 import 'fade_extension.dart';
 
 enum SGRoute {
   home,
   login,
-  settings;
+  settings,
+  wallpaper;
 
   String get route => '/${toString().replaceAll('SGRoute.', '')}';
   String get name => toString().replaceAll('SGRoute.', '');
@@ -39,6 +41,11 @@ class SGGoRouter {
         path: SGRoute.settings.route,
         builder: (BuildContext context, GoRouterState state) =>
             const SettingsPage(),
+      ).fade(),
+      GoRoute(
+        path: SGRoute.wallpaper.route,
+        builder: (BuildContext context, GoRouterState state) =>
+            const WallpaperPage(),
       ).fade(),
     ],
     errorBuilder: (BuildContext context, GoRouterState state) => NotFoundPage(
