@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../utils/context_extensions.dart';
 import '../home/widgets/flutter_nav_bar.dart';
-import 'gradient_bg.dart';
-import 'wallpaper_item.dart';
 
 class WallpaperPage extends ConsumerWidget {
   const WallpaperPage({super.key});
@@ -13,42 +10,18 @@ class WallpaperPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      bottomNavigationBar: const NavBar(),
-      body: GradientBackground(
-        gradientColors: <Color>[
-          context.colorScheme.primaryContainer,
-          context.colorScheme.primary,
-        ],
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              const Gap(30),
-              GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-                padding: EdgeInsets.zero,
-                children: packageList,
-              ),
-              const Gap(100),
-              Text(
-                'Wallpaper',
-                style: context.textTheme.headlineMedium,
-              ),
-            ],
+        bottomNavigationBar: const NavBar(),
+        body: MasonryGridView.builder(
+          gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
           ),
-        ),
-      ),
-    );
+          itemCount: 8,
+          itemBuilder: (BuildContext context, int index) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('assets/img/wp${index + 1}.png'),
+          ),
+        ));
   }
 }
 
-List<WallpaperItem> packageList = <WallpaperItem>[
-  const WallpaperItem(),
-  const WallpaperItem(),
-  const WallpaperItem(),
-  const WallpaperItem(),
-  const WallpaperItem(),
-  const WallpaperItem(),
-];
+
