@@ -82,6 +82,7 @@ dependencies:
   line_icons: ^2.0.3
   floating_frosted_bottom_bar: ^0.0.1
   flutter_staggered_grid_view: ^0.7.0
+  photo_view: ^0.14.0
 
 
 dev_dependencies:
