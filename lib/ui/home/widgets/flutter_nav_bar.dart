@@ -20,32 +20,32 @@ class NavBar extends ConsumerWidget {
       showUnselectedLabels: false,
       type: BottomNavigationBarType.fixed,
       selectedIconTheme: IconThemeData(
-        size: 23,
+        size: 25,
         color: context.theme.iconTheme.color,
       ),
       unselectedIconTheme: IconThemeData(
-        size: 23,
+        size: 25,
         color: context.theme.iconTheme.color?.withOpacity(0.7),
       ),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
+          icon: Icon(Icons.format_quote_rounded, size: 30,),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_outline_rounded),
+          icon: Icon(Icons.favorite_rounded),
           label: 'Meditation',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.grid_view_outlined),
-          label: 'Walllpapers',
+          icon: Icon(Icons.grid_view_rounded, size: 30,),
+          label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline_rounded),
+          icon: Icon(Icons.person_rounded),
           label: 'Profile',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings_outlined),
+          icon: Icon(Icons.settings_rounded),
           label: 'Settings',
         )
       ],
@@ -62,7 +62,7 @@ class NavBar extends ConsumerWidget {
             context.go('/wallpaper');
             break;
           case 3:
-            context.go('/profile');
+            context.go('/profile_home');
             break;
           case 4:
             context.go('/settings');

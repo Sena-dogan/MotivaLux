@@ -26,8 +26,6 @@ class HomeScreen extends ConsumerWidget {
                 opacity: AlwaysStoppedAnimation(0.7),
               ),
             ),
-            // menu button
-
             PageviewSlide(),
           ],
         ));
