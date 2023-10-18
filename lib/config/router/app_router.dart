@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../ui/auth/login_page.dart';
 import '../../ui/error/not_found_page.dart';
+import '../../ui/favorites/favorite_page.dart';
 import '../../ui/home/home.dart';
 import '../../ui/profile_home/profile_home_page.dart';
 import '../../ui/settings/settings_page.dart';
@@ -18,7 +19,8 @@ enum SGRoute {
   login,
   settings,
   wallpaper,
-  profile_home;
+  profile_home,
+  likes;
 
   String get route => '/${toString().replaceAll('SGRoute.', '')}';
   String get name => toString().replaceAll('SGRoute.', '');
@@ -53,6 +55,11 @@ class SGGoRouter {
         path: SGRoute.profile_home.route,
         builder: (BuildContext context, GoRouterState state) =>
             const ProfileHomePage(),
+      ).fade(),
+      GoRoute(
+        path: SGRoute.likes.route,
+        builder: (BuildContext context, GoRouterState state) =>
+            const FavoritePage(),
       ).fade(),
     ],
     errorBuilder: (BuildContext context, GoRouterState state) => NotFoundPage(
