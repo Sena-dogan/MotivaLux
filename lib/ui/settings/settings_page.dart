@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../utils/context_extensions.dart';
 import '../home/widgets/flutter_nav_bar.dart';
 import '../wallpaper/gradient_bg.dart';
 import 'theme_widget.dart';
@@ -52,10 +53,17 @@ class SettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      child: Card(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: context.theme.primaryColorDark,
+        ),
         child: ListTile(
-          title: Text(title),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(title, style: context.theme.primaryTextTheme.bodyLarge),
+          ),
           onTap: onTap,
         ),
       ),
