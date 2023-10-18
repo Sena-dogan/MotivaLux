@@ -4,13 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class FadeTransitionPage extends CustomTransitionPage {
-  FadeTransitionPage({required LocalKey super.key, required super.child})
-      : super(
+  FadeTransitionPage({
+    required LocalKey super.key,
+    required super.child,
+    super.arguments,
+    super.fullscreenDialog = false,
+    super.transitionDuration = const Duration(milliseconds: 150),
+  }) : super(
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,
               Animation<double> secondaryAnimation,
               Widget child) {
-            return FadeTransition(opacity: animation, child: child);
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
           },
         );
 }
@@ -21,7 +29,10 @@ extension GoRouteExtension on GoRoute {
   GoRoute fade() {
     return GoRoute(
         path: path,
-        pageBuilder: (BuildContext context, GoRouterState state) {
+        pageBuilder: (
+          BuildContext context,
+          GoRouterState state,
+        ) {
           return FadeTransitionPage(
             key: ValueKey<String>(path),
             child: builder!(context, state),
