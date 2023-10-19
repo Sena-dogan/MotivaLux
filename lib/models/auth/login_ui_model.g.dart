@@ -10,7 +10,7 @@ _$_LoginUiModel _$$_LoginUiModelFromJson(Map<String, dynamic> json) =>
     _$_LoginUiModel(
       isLoggedIn: json['isLoggedIn'] as bool? ?? false,
       isLoading: json['isLoading'] as bool? ?? false,
-      error: json['error'] as String? ?? null,
+      error: json['error'] as String?,
     );
 
 Map<String, dynamic> _$$_LoginUiModelToJson(_$_LoginUiModel instance) =>

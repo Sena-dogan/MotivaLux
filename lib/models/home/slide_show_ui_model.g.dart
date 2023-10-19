@@ -9,7 +9,7 @@ part of 'slide_show_ui_model.dart';
 _$_SlideShowUIModel _$$_SlideShowUIModelFromJson(Map<String, dynamic> json) =>
     _$_SlideShowUIModel(
       isLoading: json['isLoading'] as bool? ?? false,
-      error: json['error'] as String? ?? null,
+      error: json['error'] as String?,
       slides: (json['slides'] as List<dynamic>?)
               ?.map((e) => Slide.fromJson(e as Map<String, dynamic>))
               .toList() ??
