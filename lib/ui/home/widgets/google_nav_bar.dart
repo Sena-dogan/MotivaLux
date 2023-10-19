@@ -19,7 +19,7 @@ class GNavBar extends ConsumerWidget {
       height: size.height * 0.11,
       decoration: BoxDecoration(
         color: Colors.black,
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
             blurRadius: 20,
             color: Colors.black.withOpacity(.1),

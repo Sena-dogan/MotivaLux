@@ -20,7 +20,7 @@ class _NotFoundPageState extends State<NotFoundPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             const Text('Not Found'),
             // back to home button
             ElevatedButton(

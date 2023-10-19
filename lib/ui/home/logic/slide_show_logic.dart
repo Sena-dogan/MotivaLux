@@ -10,7 +10,7 @@ part 'slide_show_logic.g.dart';
 
 @riverpod
 Future<List<Slide>> fetchSlides(FetchSlidesRef ref) async {
-  final List<Slide> slides = [
+  final List<Slide> slides = <Slide>[
     const Slide(
       isVideo: true,
       mediaUrl: '',
