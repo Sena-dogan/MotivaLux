@@ -11,7 +11,6 @@ class ImgPage extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.red,
         elevation: 0,
-        automaticallyImplyLeading: true,
       ),
       backgroundColor: Colors.transparent,
       body: Stack(

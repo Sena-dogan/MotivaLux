@@ -21,7 +21,7 @@ class FavoritePage extends StatelessWidget {
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 20,
-              childAspectRatio: 0.8,
+              childAspectRatio: 0.7,
             ),
             children: const <Widget>[
               FavoriteCard(),
@@ -47,7 +47,7 @@ class FavoriteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(30),
         color: context.theme.primaryColorDark,
       ),
     );
