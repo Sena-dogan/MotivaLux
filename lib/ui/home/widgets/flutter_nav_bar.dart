@@ -34,11 +34,11 @@ class NavBar extends ConsumerWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite_rounded),
-          label: 'Meditation',
+          label: 'Likes',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.grid_view_rounded, size: 30,),
-          label: 'Home',
+          label: 'Wallpapers',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_rounded),
