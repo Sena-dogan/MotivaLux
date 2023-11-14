@@ -1,4 +1,4 @@
-package com.digitexa.motivation
+package com.digitexa.motivalux
 
 import io.flutter.embedding.android.FlutterActivity
 

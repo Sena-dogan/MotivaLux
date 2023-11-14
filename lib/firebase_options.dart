@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '409228703352',
     projectId: 'motivation-29e5b',
     storageBucket: 'motivation-29e5b.appspot.com',
-    iosClientId: '409228703352-f8ci3ivr435pbmcshd4djqrpqlstlipo.apps.googleusercontent.com',
-    iosBundleId: 'com.digitexa.motivation',
+    iosClientId:
+        '409228703352-f8ci3ivr435pbmcshd4djqrpqlstlipo.apps.googleusercontent.com',
+    iosBundleId: 'com.digitexa.motivalux',
   );
 }

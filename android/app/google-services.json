@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:409228703352:android:c7692ccd2f65960cb21f8d",
         "android_client_info": {
-          "package_name": "com.digitexa.motivation"
+          "package_name": "com.digitexa.motivalux"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "409228703352-f8ci3ivr435pbmcshd4djqrpqlstlipo.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.digitexa.motivation"
+                "bundle_id": "com.digitexa.motivalux"
               }
             }
           ]
