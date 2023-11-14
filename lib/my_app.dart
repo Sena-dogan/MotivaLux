@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
       routerConfig: getIt<SGGoRouter>().getGoRouter,
 
       /// Localization is not available for the title.
-      title: 'Flutter Production Boilerplate',
+      title: 'MotivaLux',
 
       // Theme config for FlexColorScheme version 7.2.x. Make sure you use
       // same or higher package version, but still same major version. If you
@@ -34,13 +34,12 @@ class MyApp extends ConsumerWidget {
           blendOnColors: false,
           useTextTheme: true,
           useM2StyleDividerInM3: true,
-          
         ),
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
         splashFactory: NoSplash.splashFactory,
         fontFamily: GoogleFonts.roboto().fontFamily,
-      
+
         // To use the Playground font, add GoogleFonts package and uncomment
         // fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
@@ -61,14 +60,12 @@ class MyApp extends ConsumerWidget {
 
         // To use the Playground font, add GoogleFonts package and uncomment
         fontFamily: GoogleFonts.roboto().fontFamily,
-        
       ),
       themeMode: currentTheme.themeMode,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      
     );
   }
 }
