@@ -73,7 +73,7 @@ final String? Function(BuildContext context, GoRouterState state) _authGuard =
     (BuildContext context, GoRouterState state) {
   if (FirebaseAuth.instance.currentUser == null) {
     debugPrint('SGGoRouter: AuthGuard: No user found, redirecting to login');
-    return SGRoute.home.route; //SGRoute.login.route;
+    return SGRoute.login.route;
   }
   return SGRoute.home.route;
 };

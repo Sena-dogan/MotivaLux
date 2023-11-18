@@ -6,7 +6,7 @@ part of 'slide_show_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchSlidesHash() => r'f2c5d1141eadd3e26dc9387455cd19f9c46f6ed8';
+String _$fetchSlidesHash() => r'a4b9bd3c33a0cd754da7afe889f64cc26246c0d0';
 
 /// See also [fetchSlides].
 @ProviderFor(fetchSlides)

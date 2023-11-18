@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../utils/context_extensions.dart';
+import '../auth/login_logic.dart';
 import '../home/widgets/flutter_nav_bar.dart';
 import '../wallpaper/gradient_bg.dart';
 import 'theme_widget.dart';
@@ -31,7 +34,26 @@ class SettingsPage extends ConsumerWidget {
             ),
             SettingsCard(
               title: 'Logout',
-              onTap: () => context.go('/logout'),
+              onTap: () {
+                if (Platform.isIOS) {
+                  ref
+                      .read(loginLogicProvider.notifier)
+                      .signOutWithApple()
+                      .then(
+                        // ignore: always_specify_types
+                        (value) => context.go('/login'),
+                      );
+                }
+                if (Platform.isAndroid) {
+                  ref
+                      .read(loginLogicProvider.notifier)
+                      .signOutWithGoogle()
+                      .then(
+                        // ignore: always_specify_types
+                        (value) => context.go('/login'),
+                      );
+                }
+              },
             ),
           ],
         ),

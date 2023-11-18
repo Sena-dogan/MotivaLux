@@ -163,7 +163,7 @@ class MainText extends ConsumerWidget {
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 17,
+              fontSize: 20,
               height: 2,
               letterSpacing: 1,
               color: Colors.white,
@@ -203,7 +203,7 @@ class AuthorText extends StatelessWidget {
       child: Text('— ${widget.slide.author}',
           style: GoogleFonts.dancingScript(
             color: Colors.grey[200],
-            fontSize: 25,
+            fontSize: 27,
             shadows: <Shadow>[
               const Shadow(
                 offset: Offset(2.0, 2.0),

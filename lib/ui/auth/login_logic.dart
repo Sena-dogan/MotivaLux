@@ -75,4 +75,31 @@ class LoginLogic extends _$LoginLogic {
   void setLoggedIn(bool isLoggedIn) {
     state = state.copyWith(isLoggedIn: isLoggedIn);
   }
+
+  // Log out from Google
+Future<void> signOutWithGoogle() async {
+  try {
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+    setLoggedIn(false);
+  } catch (e) {
+    debugPrint(e.toString());
+    setError(e.toString());
+  }
+}
+
+// Log out from Apple
+Future<void> signOutWithApple() async {
+  try {
+    // Apple sign-in doesn't provide a sign-out method. 
+    // So, we only need to sign out from Firebase.
+    await FirebaseAuth.instance.signOut();
+    setLoggedIn(false);
+  } catch (e) {
+    debugPrint(e.toString());
+    setError(e.toString());
+  }
+}
+
+
 }
