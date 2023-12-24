@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
+import '../../config/router/app_router.dart';
+import '../../utils/context_extensions.dart';
 import 'login_logic.dart';
-
-
 
 class AuthSocialWidget extends ConsumerStatefulWidget {
   const AuthSocialWidget({super.key});
@@ -19,38 +20,54 @@ class AuthSocialWidget extends ConsumerStatefulWidget {
 class _AuthSocialWidgetState extends ConsumerState<AuthSocialWidget> {
   @override
   Widget build(BuildContext context) {
-    return (Platform.isIOS
-        ? const SignInWithApple()
-        : const SignInWithGoogle());
-  }
-}
-
-class SignInWithApple extends ConsumerWidget {
-  const SignInWithApple({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SocialLoginButton(
-        buttonType: SocialLoginButtonType.appleBlack,
-        backgroundColor: Colors.black,
-        borderRadius: 50,
-        onPressed: () {
-          ref.read(loginLogicProvider.notifier).signInWithApple();
-        });
-  }
-}
-
-class SignInWithGoogle extends ConsumerWidget {
-  const SignInWithGoogle({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SocialLoginButton(
-        buttonType: SocialLoginButtonType.google,
-        backgroundColor: Colors.white,
-        borderRadius: 50,
-        onPressed: () {
-          ref.read(loginLogicProvider.notifier).signInWithGoogle();
-        });
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        width: context.width * 0.9,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: SocialLoginButton(
+                  buttonType: SocialLoginButtonType.google,
+                  onPressed: () async {
+                    await ref
+                        .read(loginLogicProvider.notifier)
+                        .signInWithGoogle()
+                        .then((bool value) => value
+                            ? context.go(SGRoute.home.route)
+                            : context.showErrorSnackBar(
+                                title: 'Hata',
+                                message:
+                                    'Bir hata oluştu. Lütfen tekrar deneyiniz.'));
+                  },
+                  borderRadius: 30),
+            ),
+            Visibility(
+              visible: Platform.isIOS,
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: SocialLoginButton(
+                    buttonType: SocialLoginButtonType.appleBlack,
+                    onPressed: () {
+                      ref
+                          .read(loginLogicProvider.notifier)
+                          .signInWithApple()
+                          .then((bool value) => value
+                              ? context.go(SGRoute.home.route)
+                              : context.showErrorSnackBar(
+                                  title: 'Hata',
+                                  message:
+                                      'Bir hata oluştu. Lütfen tekrar deneyiniz.'));
+                    },
+                    borderRadius: 30),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

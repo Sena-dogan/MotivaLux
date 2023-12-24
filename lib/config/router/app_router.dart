@@ -29,7 +29,7 @@ enum SGRoute {
 @Singleton()
 class SGGoRouter {
   final GoRouter goRoute = GoRouter(
-    initialLocation: SGRoute.home.route,
+    initialLocation: SGRoute.login.route,
     debugLogDiagnostics: true,
     routes: <GoRoute>[
       GoRoute(

@@ -87,6 +87,8 @@ dependencies:
   fluentui_system_icons: ^1.1.219
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.5
+  firebase_crashlytics: ^3.4.6
+  awesome_snackbar_content: ^0.1.3
 
 
 dev_dependencies:

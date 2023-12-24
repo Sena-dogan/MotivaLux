@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -16,36 +19,50 @@ class LoginLogic extends _$LoginLogic {
   }
 
   void setLogin({bool isLoading = false}) {
-    state = state.copyWith(isLoading: isLoading);
+    state = state.copyWith(isLoading: isLoading, isLoggedIn: true);
   }
 
   void clear() {
     state = state.copyWith(error: null, isLoading: false);
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     try {
       setLogin(isLoading: true);
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser!.authentication;
+      final GoogleSignInAccount? googleUser = await GoogleSignIn(
+              clientId: Platform.isIOS
+                  ? '247383540944-p3ji8erp1cscvs4hov7prbahfbqtpbrp.apps.googleusercontent.com'
+                  : null)
+          .signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
       );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      setLogin();
-    } catch (e) {
-      debugPrint(e.toString());
+      await FirebaseAuth.instance
+          .signInWithCredential(credential)
+          .then((UserCredential value) {
+        final User firebaseUser = value.user!;
+        firebaseUser.updateDisplayName(googleUser?.displayName);
+        firebaseUser.updatePhotoURL(googleUser?.photoUrl);
+      });
+      return true;
+    } catch (e, stackTrace) {
+      debugPrint('Error: $e');
+      FirebaseCrashlytics.instance.recordError(e, stackTrace);
       setError(e.toString());
       setLogin();
+      return false;
     }
   }
 
-  Future<void> signInWithApple() async {
-    debugPrint('hello my name is apple. i am 7 years old. i like to eat apples');
+  Future<bool> signInWithApple() async {
+    debugPrint(
+        'hello my name is apple. i am 7 years old. i like to eat apples');
     try {
-    debugPrint('AAAAAAAAAA my name is apple. i am 7 years old. i like to eat apples');
+      debugPrint(
+          'AAAAAAAAAA my name is apple. i am 7 years old. i like to eat apples');
       setLogin(isLoading: true);
       final AuthorizationCredentialAppleID appleCredential =
           await SignInWithApple.getAppleIDCredential(
@@ -59,12 +76,53 @@ class LoginLogic extends _$LoginLogic {
         idToken: appleCredential.identityToken,
         accessToken: appleCredential.authorizationCode,
       );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      setLogin();
+      await FirebaseAuth.instance
+          .signInWithCredential(credential)
+          .then((UserCredential userCredential) {
+        final User firebaseUser = userCredential.user!;
+        if (appleCredential.givenName != null &&
+            appleCredential.familyName != null) {
+          firebaseUser.updateDisplayName(
+              '${appleCredential.givenName} ${appleCredential.familyName}');
+        }
+      });
+      return true;
     } catch (e) {
       debugPrint(e.toString());
       setError(e.toString());
-      setLogin();
+      return false;
+    }
+  }
+
+  Future<bool> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      // Check google sign in
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      if (await googleSignIn.isSignedIn()) {
+        await googleSignIn.disconnect();
+        await googleSignIn.signOut();
+      }
+      return true;
+    } catch (e) {
+      debugPrint('Error: $e');
+      setError(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> removeUser() async {
+    try {
+      await FirebaseAuth.instance.currentUser?.delete();
+      if (await GoogleSignIn().isSignedIn()) {
+        await GoogleSignIn().disconnect();
+        await GoogleSignIn().signOut();
+      }
+      return true;
+    } catch (e) {
+      debugPrint('Error: $e');
+      setError(e.toString());
+      return false;
     }
   }
 
@@ -75,31 +133,4 @@ class LoginLogic extends _$LoginLogic {
   void setLoggedIn(bool isLoggedIn) {
     state = state.copyWith(isLoggedIn: isLoggedIn);
   }
-
-  // Log out from Google
-Future<void> signOutWithGoogle() async {
-  try {
-    await GoogleSignIn().signOut();
-    await FirebaseAuth.instance.signOut();
-    setLoggedIn(false);
-  } catch (e) {
-    debugPrint(e.toString());
-    setError(e.toString());
-  }
-}
-
-// Log out from Apple
-Future<void> signOutWithApple() async {
-  try {
-    // Apple sign-in doesn't provide a sign-out method. 
-    // So, we only need to sign out from Firebase.
-    await FirebaseAuth.instance.signOut();
-    setLoggedIn(false);
-  } catch (e) {
-    debugPrint(e.toString());
-    setError(e.toString());
-  }
-}
-
-
 }
